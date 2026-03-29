@@ -1,9 +1,9 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 
 import ListItem from './components/ListItem.vue';
 
-const items = ref(['Чай', 'Печенье']);
+const items = ref([]);
 const newItem = ref('');
 
 const totalItems = computed(() => {
@@ -21,8 +21,16 @@ const removeItem = (index) => {
   items.value.splice(index, 1)
 }
 
+onMounted(() => {
+  const savedItems = localStorage.getItem('my-todo-list')
+
+  if (savedItems) {
+    items.value = JSON.parse(savedItems)
+  }
+})
+
 watch(items, () => {
-  console.log('Список изменился!', items.value)
+  localStorage.setItem('my-todo-list', JSON.stringify(items.value))
 }, { deep : true })
 
 </script>
