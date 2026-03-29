@@ -40,4 +40,5 @@ onMounted(() => {
       @remove="removeItem(index)"
     />
   </ul>
+  <button class="secondary" @click="store.clearItems">Очистить</button>
 </template>

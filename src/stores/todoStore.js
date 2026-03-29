@@ -8,6 +8,8 @@ export const useTodoStore = defineStore('todo', ()=> {
     return items.value.length;
     })
 
+    const clearItems =() => { items.value = [] }
+
     watch(items, () => {
     localStorage.setItem('my-todo-list', JSON.stringify(items.value))
     }, { deep : true })
@@ -16,5 +18,6 @@ export const useTodoStore = defineStore('todo', ()=> {
     return {
         items,
         totalItems,
+        clearItems,
     }
 })
